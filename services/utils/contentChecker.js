@@ -13,7 +13,7 @@ async function getValidRelations(value, attribute) {
   if (MANY_RELATIONS.includes(relationType)) {
     const relations = Array.isArray(value) ? value : [value];
     const ids = relations.map(getId);
-    const entities = await strapi.query(targetModel).find({ id_in: ids });
+    const entities = await strapi.query(targetModel).find({ id_in: ids }, []);
     return entities.map(({ id }) => id);
   } else {
     const relation = Array.isArray(value) ? value[0] : value;
